@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  background-color: black;
+}
+
+#madeira_night {
+  background: url('Funchal_by_night,_Madeira,_Portugal,_June-July_2011_-_panoramio_(1).jpg') center;
+  transform: rotate(-180deg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#toque {
+  font-size: 5rem;
+  color: #f5f5f5;
+  background-color: Transparent;
+  font-family: 'Yatra One', cursive;
+  text-shadow: 0 0 1px black,
+    0 0 1px black,
+    0 0 1px black,
+    0 0 1px black;
+  /* transform: rotate(180deg); */
+  border-radius: 60px;
+  outline: none;
+  border: none;
+}
+
+#toque:before {
+  content: 'PLAY';
+}
+
+#toque.not-playing {
+  transform: rotate(180deg);
+}
+
+#toque.playing:before {
+  content: 'PAUSE';
+  color: black;
+  text-shadow: 0 0 1px #f5f5f5,
+    0 0 1px #f5f5f5,
+    0 0 1px #f5f5f5,
+    0 0 1px #f5f5f5;
+}
+
+#toque.playing {
+  transform: rotateX(180deg);
+}

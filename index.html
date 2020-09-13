@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Daniel Nakitare</title>
+  <!--local css-->
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <audio src="Dead_Combo_-_01_-_Povo_Que_Cas_Descalo.mp3"></audio>
+  <div id="madeira_night">
+    <button id="toque" class="not-playing" data-playing="false" role="switch" aria-checked="false">
+      <span></span>
+    </button>
+  </div>
+</body>
+<script>
+  // for legacy browsers
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  const audioContext = new AudioContext();
+
+  // get the audio element
+  const audioElement = document.querySelector('audio');
+
+  // pass it into the audio context
+  const track = audioContext.createMediaElementSource(audioElement);
+
+  // create output node
+  track.connect(audioContext.destination);
+
+  // select our play button
+  const playButton = document.querySelector('button');
+
+  playButton.addEventListener('click', function () {
+
+    // check if context is in suspended state (autoplay policy)
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+
+
+    // play or pause track depending on state
+    if (this.dataset.playing === 'false') {
+      audioElement.play();
+      this.dataset.playing = 'true';
+      this.classList.remove('not-playing');
+      this.classList.add('playing');
+    } else if (this.dataset.playing === 'true') {
+      audioElement.pause();
+      this.dataset.playing = 'false';
+      this.classList.remove('playing');
+      this.classList.add('not-playing');
+    }
+
+  }, false);
+
+  // make sure that when the track ends it resets the button
+  audioElement.addEventListener('ended', () => {
+    playButton.dataset.playing = 'false';
+  }, false);
+</script>
+
+</html>
